@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WebQuest Summative Rubric (10 points)</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --text:#e9ecf8;
+      --muted:#b7bfdc;
+      --border:rgba(255,255,255,.12);
+      --accent:#7aa2ff;
+      --good:#35d07f;
+      --bad:#ff5c7a;
+      --shadow:0 10px 28px rgba(0,0,0,.25);
+      --radius:16px;
+      --mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(122,162,255,.18), transparent 55%),
+        radial-gradient(900px 520px at 85% 30%, rgba(53,208,127,.10), transparent 55%),
+        radial-gradient(900px 520px at 60% 95%, rgba(255,92,122,.10), transparent 55%),
+        var(--bg);
+      line-height:1.4;
+    }
+    header{
+      max-width:1100px;
+      margin:0 auto;
+      padding:22px 18px 10px;
+    }
+    .titleRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:flex-end;
+      justify-content:space-between;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(18px,2.2vw,26px);
+    }
+    .sub{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      max-width:85ch;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      color:var(--muted);
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .pill strong{
+      color:var(--text);
+      font-family:var(--mono);
+      font-weight:800;
+    }
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:10px 18px 24px;
+      display:grid;
+      gap:14px;
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .legend{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      font-size:12.5px;
+      color:var(--muted);
+    }
+    .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+    .btnRow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    button{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(122,162,255,.18);
+      border:1px solid rgba(122,162,255,.35);
+      color:var(--text);
+      font-weight:700;
+      transition:transform .06s ease, background .15s ease, border-color .15s ease;
+    }
+    button:hover{ background:rgba(122,162,255,.24); border-color:rgba(122,162,255,.55); }
+    button:active{ transform:translateY(1px); }
+    .btnSecondary{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      color:var(--muted);
+    }
+    .btnSecondary:hover{
+      background:rgba(255,255,255,.09);
+      border-color:rgba(255,255,255,.18);
+      color:var(--text);
+    }
+    .hint{
+      font-size:13px;
+      color:var(--muted);
+      max-width:75ch;
+    }
+    .grid{ display:grid; gap:14px; }
+    .criterion{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .critHeader{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      padding:14px 14px 10px;
+      background:rgba(0,0,0,.08);
+      border-bottom:1px solid var(--border);
+    }
+    .critHeader h2{ margin:0; font-size:16px; }
+    .meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      text-align:right;
+      min-width:240px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:12.5px;
+      white-space:nowrap;
+    }
+    .badge strong{ color:var(--text); font-family:var(--mono); }
+    .critBody{
+      padding:12px 14px 14px;
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:14px;
+    }
+    @media (max-width:860px){
+      .critBody{ grid-template-columns:1fr; }
+      .meta{ min-width:0; justify-content:flex-start; text-align:left; }
+    }
+    .subcriteria{ display:flex; flex-direction:column; gap:10px; }
+    .item{
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:flex-start;
+      padding:10px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(0,0,0,.10);
+    }
+    label{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      cursor:pointer;
+      flex:1;
+    }
+    input[type="checkbox"]{
+      margin-top:2px;
+      width:18px;
+      height:18px;
+      accent-color:var(--accent);
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .itemText{ display:flex; flex-direction:column; gap:4px; }
+    .itemText .name{ font-weight:700; font-size:14px; color:var(--text); }
+    .itemText .desc{ font-size:13px; color:var(--muted); }
+    .pts{
+      font-family:var(--mono);
+      font-size:13px;
+      color:var(--muted);
+      padding:6px 8px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      white-space:nowrap;
+      align-self:flex-start;
+    }
+    .commentBox{ display:flex; flex-direction:column; gap:8px; }
+    .commentBox .lbl{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    textarea{
+      width:100%;
+      min-height:130px;
+      resize:vertical;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.12);
+      color:var(--text);
+      padding:10px;
+      font-family:var(--sans);
+      font-size:14px;
+      outline:none;
+    }
+    textarea:focus{
+      border-color:rgba(122,162,255,.6);
+      box-shadow:0 0 0 4px rgba(122,162,255,.14);
+    }
+    .toast{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      max-width:min(520px, calc(100vw - 28px));
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(18,26,51,.95);
+      box-shadow:var(--shadow);
+      display:none;
+      z-index:999;
+    }
+    .toast .small{ color:var(--muted); font-size:13px; margin-top:2px; }
+    .srOnly{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="titleRow">
+      <div>
+        <h1>Interactive Rubric — WebQuest Summative Product</h1>
+        <p class="sub">Tick subcriteria to calculate a score out of 10. Add comments per criterion, then copy results into Toddle/LMS.</p>
+      </div>
+      <div class="pill" aria-live="polite">
+        <span>Total (max 10):</span>
+        <strong id="totalScore">0.00</strong>
+        <span>/ 10</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="Rubric Controls">
+      <div class="legend">
+        <span class="chip"><span class="dot" style="background:var(--good)"></span>🟩 ✓ checked</span>
+        <span class="chip"><span class="dot" style="background:var(--bad)"></span>🟥 ✗ unchecked</span>
+        <span class="chip">Running totals shown per criterion + overall</span>
+      </div>
+      <div class="btnRow">
+        <button id="copyBtn" type="button">Copy results for Virtual Classroom</button>
+        <button id="resetBtn" type="button" class="btnSecondary">Reset</button>
+      </div>
+      <div class="hint">Criteria aligned to your planner: Investigating, Communicating, Thinking Critically, Historical Accuracy & Evidence.</div>
+    </section>
+
+    <section class="grid" id="rubricRoot" aria-label="Rubric Criteria"></section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div id="toastTitle">Copied!</div>
+    <div class="small" id="toastBody">Results copied to clipboard.</div>
+  </div>
+
+  <script>
+    // IMPORTANT: Total points must equal 10.
+    const rubricData = {
+      title: "WebQuest Summative Rubric (Total 10)",
+      totalPoints: 10,
+      criteria: [
+        {
+          id: "investigating",
+          title: "Investigating (3.0 points) — Using the Investigation Plan",
+          points: 3.0,
+          commentPlaceholder: "Comment on how the student used the research question, plan, and sources…",
+          subcriteria: [
+            { id: "inv1", label: "Focused research question", description: "Question is specific, historical, and connected to protest/change." },
+            { id: "inv2", label: "Purposeful use of sources", description: "Uses relevant sources (primary/secondary) selected in the plan; evidence is appropriate." },
+            { id: "inv3", label: "Inquiry process is visible", description: "Shows how the plan guided the investigation (and any changes are justified)." }
+          ]
+        },
+        {
+          id: "communicating",
+          title: "Communicating (2.5 points) — Clear Historical Communication",
+          points: 2.5,
+          commentPlaceholder: "Comment on clarity, structure, and digital communication…",
+          subcriteria: [
+            { id: "com1", label: "Clear structure and storyline", description: "Introduction → evidence → explanation → conclusion; answers the research question." },
+            { id: "com2", label: "Appropriate historical vocabulary", description: "Uses key terms accurately (segregation, apartheid, resistance, equity, etc.)." },
+            { id: "com3", label: "Effective use of digital format", description: "Chosen format supports understanding and is easy to follow." },
+            { id: "com4", label: "Communication choices support audience", description: "Pacing, visuals/audio, and labels help the viewer understand." },
+            { id: "com5", label: "Sources acknowledged", description: "Evidence is credited (source list/credits slide or spoken credits)." }
+          ]
+        },
+        {
+          id: "thinking",
+          title: "Thinking Critically (3.0 points) — Analysis & Evaluation",
+          points: 3.0,
+          commentPlaceholder: "Comment on analysis of causes, protest strategies, outcomes, and perspectives…",
+          subcriteria: [
+            { id: "thi1", label: "Explains cause and consequence", description: "Shows how injustice led to protest and how protest contributed to change over time." },
+            { id: "thi2", label: "Evaluates effectiveness", description: "Judges successes/limitations using evidence (not just opinion)." },
+            { id: "thi3", label: "Multiple perspectives", description: "Includes more than one viewpoint (e.g., protesters, government, public, international response)." }
+          ]
+        },
+        {
+          id: "accuracy",
+          title: "Historical Accuracy & Use of Evidence (1.5 points)",
+          points: 1.5,
+          commentPlaceholder: "Comment on accuracy, specificity, and evidence quality…",
+          subcriteria: [
+            { id: "acc1", label: "Accurate historical content", description: "People, events, dates, and claims are correct; avoids major misconceptions." },
+            { id: "acc2", label: "Evidence supports claims", description: "Examples and evidence are specific and clearly linked to claims." },
+            { id: "acc3", label: "Relevance today is thoughtful", description: "Connects to today without oversimplifying historical context." }
+          ]
+        }
+      ]
+    };
+
+    // Helpers
+    function round2(n){ return Math.round((n + Number.EPSILON) * 100) / 100; }
+    function sum(arr){ return arr.reduce((a,b)=>a+b,0); }
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      })[s]);
+    }
+
+    function validateRubric(data){
+      const errors = [];
+      if(!data || !Array.isArray(data.criteria) || data.criteria.length === 0){
+        errors.push("No criteria found.");
+        return errors;
+      }
+      if(round2(data.totalPoints) !== 10) errors.push("Total score must be 10 points.");
+      const total = round2(sum(data.criteria.map(c => Number(c.points || 0))));
+      if(total !== 10) errors.push("Criterion weights must sum to 10. Current: " + total);
+      data.criteria.forEach(c => {
+        if(!c.title) errors.push("Criterion missing title: " + c.id);
+        if(!Array.isArray(c.subcriteria) || c.subcriteria.length === 0){
+          errors.push('Criterion "' + (c.title || c.id) + '" must have at least one subcriterion.');
+        }
+      });
+      return errors;
+    }
+
+    // State
+    const state = { checked: new Set(), comments: new Map() };
+
+    // DOM
+    const root = document.getElementById("rubricRoot");
+    const totalScoreEl = document.getElementById("totalScore");
+    const copyBtn = document.getElementById("copyBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function subPts(criterion){
+      return criterion.subcriteria.length ? (criterion.points / criterion.subcriteria.length) : 0;
+    }
+    function criterionScore(criterion){
+      const ptsEach = subPts(criterion);
+      const checkedCount = criterion.subcriteria.filter(sc => state.checked.has(sc.id)).length;
+      return round2(checkedCount * ptsEach);
+    }
+    function totalScore(){
+      return round2(sum(rubricData.criteria.map(c => criterionScore(c))));
+    }
+
+    function render(){
+      const errors = validateRubric(rubricData);
+      if(errors.length){
+        root.innerHTML =
+          '<div class="criterion" style="padding:14px;">' +
+            '<h2 style="margin:0 0 10px;">Rubric Configuration Error</h2>' +
+            '<div style="color:var(--muted); font-family:var(--mono); white-space:pre-wrap;">' +
+              escapeHtml(errors.map(e => "• " + e).join("\n")) +
+            '</div>' +
+          '</div>';
+        totalScoreEl.textContent = "0.00";
+        return;
+      }
+
+      root.innerHTML = "";
+      rubricData.criteria.forEach(c => {
+        const ptsEach = subPts(c);
+        const score = criterionScore(c);
+        const max = round2(c.points);
+
+        const section = document.createElement("section");
+        section.className = "criterion";
+
+        section.innerHTML =
+          '<div class="critHeader">' +
+            '<div><h2>' + escapeHtml(c.title) + '</h2></div>' +
+            '<div class="meta">' +
+              '<span class="badge">Weight: <strong>' + max.toFixed(2) + '</strong></span>' +
+              '<span class="badge">Score: <strong id="' + c.id + '-score">' + score.toFixed(2) + '</strong> / ' + max.toFixed(2) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="critBody">' +
+            '<div class="subcriteria" id="' + c.id + '-subs"></div>' +
+            '<div class="commentBox">' +
+              '<div class="lbl"><span>Comments</span><span class="pts">' + ptsEach.toFixed(2) + ' pts each</span></div>' +
+              '<textarea id="' + c.id + '-comment" placeholder="' + escapeHtml(c.commentPlaceholder || "Add comments…") + '"></textarea>' +
+            '</div>' +
+          '</div>';
+
+        const subWrap = section.querySelector("#" + c.id + "-subs");
+        c.subcriteria.forEach(sc => {
+          const checked = state.checked.has(sc.id);
+
+          const item = document.createElement("div");
+          item.className = "item";
+          item.innerHTML =
+            '<label>' +
+              '<input type="checkbox" ' + (checked ? "checked" : "") + ' data-sub-id="' + escapeHtml(sc.id) + '" data-criterion-id="' + escapeHtml(c.id) + '">' +
+              '<span class="itemText">' +
+                '<span class="name">' + escapeHtml(sc.label) + '</span>' +
+                (sc.description ? '<span class="desc">' + escapeHtml(sc.description) + '</span>' : "") +
+              '</span>' +
+            '</label>' +
+            '<span class="pts">' + ptsEach.toFixed(2) + ' pts</span>';
+
+          subWrap.appendChild(item);
+        });
+
+        const ta = section.querySelector("#" + c.id + "-comment");
+        ta.value = state.comments.get(c.id) || "";
+        ta.addEventListener("input", () => state.comments.set(c.id, ta.value));
+
+        section.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.addEventListener("change", (e) => {
+            const id = e.target.getAttribute("data-sub-id");
+            if(e.target.checked) state.checked.add(id);
+            else state.checked.delete(id);
+            updateScores();
+          });
+        });
+
+        root.appendChild(section);
+      });
+
+      updateScores();
+    }
+
+    function updateScores(){
+      rubricData.criteria.forEach(c => {
+        const el = document.getElementById(c.id + "-score");
+        if(el) el.textContent = criterionScore(c).toFixed(2);
+      });
+      totalScoreEl.textContent = totalScore().toFixed(2);
+    }
+
+    // Copy as plain text with visible green/red symbols for LMS
+    function buildPlainText(){
+      const lines = [];
+      lines.push(rubricData.title);
+      lines.push("TOTAL: " + totalScore().toFixed(2) + " / 10");
+      lines.push("");
+
+      rubricData.criteria.forEach(c => {
+        lines.push(c.title);
+        lines.push("Score: " + criterionScore(c).toFixed(2) + " / " + Number(c.points).toFixed(2));
+        const ptsEach = subPts(c);
+
+        c.subcriteria.forEach(sc => {
+          const ok = state.checked.has(sc.id);
+          const symbol = ok ? "🟩 ✓" : "🟥 ✗";
+          lines.push("  " + symbol + " " + sc.label + " (" + ptsEach.toFixed(2) + " pts)");
+        });
+
+        const comment = (state.comments.get(c.id) || "").trim();
+        lines.push("  Comments: " + (comment ? comment : "—"));
+        lines.push("");
+      });
+
+      lines.push("TOTAL: " + totalScore().toFixed(2) + " / 10");
+      return lines.join("\n");
+    }
+
+    async function copyResults(){
+      const text = buildPlainText();
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Copied!", "Results copied as plain text (LMS-friendly).");
+      }catch(e){
+        // Fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.className = "srOnly";
+        document.body.appendChild(ta);
+        ta.select();
+        try{
+          document.execCommand("copy");
+          showToast("Copied!", "Results copied as plain text (LMS-friendly).");
+        }catch(err){
+          showToast("Copy failed", "A text window will open for manual copy.");
+          alert(text);
+        }
+        document.body.removeChild(ta);
+      }
+    }
+
+    function resetAll(){
+      if(!confirm("Reset all checkboxes and comments?")) return;
+      state.checked.clear();
+      state.comments.clear();
+      render();
+      showToast("Reset", "All selections and comments cleared.");
+    }
+
+    // Toast
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastBody = document.getElementById("toastBody");
+    let toastTimer = null;
+
+    function showToast(title, body){
+      toastTitle.textContent = title;
+      toastBody.textContent = body;
+      toast.style.display = "block";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { toast.style.display = "none"; }, 2600);
+    }
+
+    copyBtn.addEventListener("click", copyResults);
+    resetBtn.addEventListener("click", resetAll);
+
+    render();
+  </script>
+</body>
+</html>
